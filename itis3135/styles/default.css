@@ -31,6 +31,14 @@ nav a {
     margin-right: 15px;
 }
 
+.page-links {
+    text-align: center;
+}
+.social-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
 nav a:hover {
     color: white;
 }
@@ -45,4 +53,20 @@ footer {
     text-align: center;
     padding: 15px;
     margin-top: 20px;
+}
+
+.evaluation-box {
+    background-color: #292944;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 25px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.evaluation-box  {
+    margin-top: 0;
+}
+
+.evaluation-box ul {
+    text-align: left;
 }

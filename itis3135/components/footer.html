@@ -1,0 +1,27 @@
+<footer>
+
+    <p>
+        Page designed by
+        <a href="mbambukuluitsolutions.co/">
+            Mbambukulu IT Solutions
+        </a>
+        ©2026
+    </p>
+
+    <p>
+        <a id="html-validator" href="#">HTML Validator</a>
+        |
+        <a id="css-validator" href="#">CSS Validator</a>
+    </p>
+
+</footer>
+
+<script>
+    const currentPage = encodeURIComponent(window.location.href);
+
+    document.getElementById("html-validator").href =
+        `https://validator.w3.org/nu/?doc=${currentPage}`;
+
+    document.getElementById("css-validator").href =
+        `https://jigsaw.w3.org/css-validator/validator?uri=${currentPage}`;
+</script>

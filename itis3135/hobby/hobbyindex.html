@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A personal Overwatch hobby site: the heroes, the roles and sub-roles, my story, and why this team shooter is my passion.">
+  <meta name="author" content="Your Name">
+  <title>Hero Ready &#8226; My Overwatch Hobby</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <style>
+    /* ===========================================================
+       Hero Ready - Overwatch hobby site (single-page sections)
+       Color scheme is intentionally different from my main site.
+       CRAP: Contrast (orange on dark navy), Repetition (hex motif,
+       role colors), Alignment (grid + max-width), Proximity
+       (cards & sections group related content).
+       =========================================================== */
+
+    :root {
+      --bg:      #141d28;
+      --bg2:     #1d2a38;
+      --bg3:     #25364a;
+      --text:    #eaf1f7;
+      --muted:   #bcc9d6;
+      --accent:  #f9a826;
+      --accent2: #f06414;
+      --tank:    #4aa3df;
+      --damage:  #ef6a5a;
+      --support: #ecc35a;
+      --border:  #36506a;
+      --focus:   #ffd166;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Trebuchet MS", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 20% -10%, #223347 0, rgba(34,51,71,0) 45%),
+        radial-gradient(circle at 90% 0, #2a2030 0, rgba(42,32,48,0) 40%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    h1, h2, h3 {
+      font-family: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    a:hover, a:focus { color: #ffd07a; }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--accent);
+      color: #141d28;
+      padding: 0.6rem 1rem;
+      font-weight: bold;
+      border-radius: 0 0 8px 0;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 0; color: #141d28; }
+
+    /* ---------- Header & navigation ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(20, 29, 40, 0.96);
+      border-bottom: 3px solid var(--accent);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.45);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.9rem 1.2rem 0.3rem;
+    }
+
+    .brand img { width: 46px; height: 46px; }
+
+    .site-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 2px 0 rgba(0,0,0,0.4);
+    }
+    .brand .tagline {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .main-nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.2rem 1.2rem 0.9rem;
+    }
+    .main-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.15rem 0;
+    }
+    .main-nav li { display: flex; align-items: center; }
+    /* Unique divider symbol for this hobby page: the hexagon */
+    .main-nav li + li::before {
+      content: "\2B22";
+      color: var(--accent2);
+      margin: 0 0.55rem;
+      font-size: 0.7rem;
+    }
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+    }
+    .main-nav a:hover { background: var(--bg3); color: var(--accent); }
+    .main-nav a[aria-current="page"] {
+      background: var(--accent);
+      color: #141d28;
+    }
+
+    /* ---------- Layout ---------- */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.2rem 3rem;
+    }
+
+    .page-section { animation: fade 0.4s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .page-section > h2 {
+      font-size: 1.9rem;
+      text-transform: uppercase;
+      color: var(--text);
+      border-left: 6px solid var(--accent);
+      padding-left: 0.7rem;
+      margin-top: 0;
+    }
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent2);
+      font-weight: bold;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin: 0 0 0.2rem;
+    }
+
+    p { max-width: 70ch; }
+
+    /* ---------- Figures ---------- */
+    figure {
+      margin: 1.4rem 0;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.8rem;
+      max-width: 640px;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    figcaption {
+      margin-top: 0.7rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    figcaption .cap { display: block; color: var(--text); font-weight: bold; }
+    .ai-prompt {
+      display: block;
+      margin-top: 0.4rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed var(--border);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* ---------- Cards / grids ---------- */
+    .cards {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin: 1.4rem 0;
+    }
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.1rem;
+    }
+    .card h3 { margin: 0 0 0.4rem; color: var(--accent); font-size: 1.15rem; }
+
+    .role-tank   { border-top-color: var(--tank); }
+    .role-damage { border-top-color: var(--damage); }
+    .role-support{ border-top-color: var(--support); }
+
+    /* ---------- Tables ---------- */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 640px;
+      margin: 1.4rem 0;
+      background: var(--bg2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    caption {
+      text-align: left;
+      font-weight: bold;
+      color: var(--accent);
+      padding: 0.4rem 0;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    thead th { background: var(--bg3); text-transform: uppercase; font-size: 0.82rem; letter-spacing: 0.05em; }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* ---------- Lists ---------- */
+    .feature-list { padding-left: 0; list-style: none; max-width: 70ch; }
+    .feature-list li {
+      padding: 0.5rem 0 0.5rem 1.8rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-list li::before {
+      content: "\2B22";
+      color: var(--accent2);
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      font-size: 0.85rem;
+    }
+
+    blockquote {
+      margin: 1.4rem 0;
+      padding: 0.8rem 1.2rem;
+      border-left: 5px solid var(--accent2);
+      background: var(--bg2);
+      color: var(--text);
+      font-style: italic;
+      border-radius: 0 8px 8px 0;
+      max-width: 70ch;
+    }
+
+    /* ---------- Forms ---------- */
+    form {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      max-width: 480px;
+      margin: 1.4rem 0;
+    }
+    fieldset { border: 1px solid var(--border); border-radius: 8px; margin: 0 0 1rem; }
+    legend { color: var(--accent); font-weight: bold; padding: 0 0.4rem; }
+    label { display: block; margin: 0.5rem 0 0.25rem; font-weight: bold; }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 0.55rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      cursor: pointer;
+      font: inherit;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--accent);
+      color: #141d28;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.55rem 1.1rem;
+      text-decoration: none;
+    }
+    .btn:hover, .btn:focus { background: #ffd07a; border-color: #ffd07a; color: #141d28; }
+    .form-output {
+      margin-top: 0.8rem;
+      padding: 0.7rem;
+      border-radius: 8px;
+      background: var(--bg3);
+      min-height: 1.2rem;
+    }
+
+    /* ---------- Hero roster controls ---------- */
+    .roster-controls { margin: 1.2rem 0; }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.7rem;
+      align-items: center;
+    }
+    .filter-group .group-label {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-right: 0.3rem;
+    }
+    .filter-btn {
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: bold;
+      background: var(--bg3);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.4rem 0.95rem;
+    }
+    .filter-btn:hover { border-color: var(--accent); }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--accent);
+      color: #141d28;
+      border-color: var(--accent);
+    }
+    .filter-btn[data-role="tank"][aria-pressed="true"]    { background: var(--tank); border-color: var(--tank); }
+    .filter-btn[data-role="damage"][aria-pressed="true"]  { background: var(--damage); border-color: var(--damage); }
+    .filter-btn[data-role="support"][aria-pressed="true"] { background: var(--support); border-color: var(--support); }
+
+    .roster-count { color: var(--muted); font-size: 0.9rem; margin: 0.3rem 0 0; }
+
+    /* ---------- Hero grid ---------- */
+    .hero-grid {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      margin: 1.2rem 0;
+    }
+    .hero-card {
+      cursor: pointer;
+      font: inherit;
+      text-align: center;
+      color: var(--text);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-bottom: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 0.9rem 0.5rem;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .hero-card:hover { transform: translateY(-4px); background: var(--bg3); }
+    .hero-card .avatar { width: 84px; height: 84px; margin: 0 auto 0.5rem; }
+    .hero-card .hero-name { display: block; font-weight: bold; font-size: 1rem; }
+    .hero-card .hero-sub { display: block; font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .hero-card.tank    { border-bottom-color: var(--tank); }
+    .hero-card.damage  { border-bottom-color: var(--damage); }
+    .hero-card.support { border-bottom-color: var(--support); }
+
+    /* role + subrole pills */
+    .pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.55rem;
+      border-radius: 20px;
+      color: #141d28;
+    }
+    .pill.tank { background: var(--tank); }
+    .pill.damage { background: var(--damage); }
+    .pill.support { background: var(--support); }
+
+    /* ---------- Hero detail panel ---------- */
+    .hero-detail {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.3rem;
+      margin: 1.2rem 0;
+    }
+    .hero-detail[hidden] { display: none; }
+    .hero-detail .detail-head {
+      display: flex;
+      gap: 1.1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .hero-detail .avatar { width: 96px; height: 96px; flex: none; }
+    .hero-detail h3 { margin: 0; color: var(--accent); font-size: 1.5rem; }
+    .hero-detail .pills { margin: 0.4rem 0; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .hero-detail .close-btn { margin-left: auto; }
+    .detail-body { margin-top: 0.6rem; }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      border-top: 3px solid var(--accent);
+      background: #101822;
+      padding: 1.8rem 1.2rem;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .validation { display: flex; flex-wrap: wrap; gap: 0.6rem; padding: 0; margin: 0; list-style: none; }
+    .validation .btn { font-size: 0.78rem; padding: 0.45rem 0.8rem; }
+    .footer-meta { color: var(--muted); font-size: 0.9rem; }
+    .footer-meta p { margin: 0.2rem 0; }
+
+    @media (max-width: 600px) {
+      .site-header h1 { font-size: 1.4rem; }
+      .hero-detail .close-btn { margin-left: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .page-section, .hero-card { animation: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="brand">
+      <img src="images/favicon.svg" alt="">
+      <div>
+        <h1>Overwatch</h1>
+        <p class="tagline">Hero Ready &#8226; Heroes, Roles &amp; Why I Play</p>
+      </div>
+    </div>
+    <nav class="main-nav" aria-label="Hobby sections">
+      <ul>
+        <li><a href="#what" data-nav="what" aria-current="page">Home</a></li>
+        <li><a href="#who" data-nav="who">Who</a></li>
+        <li><a href="#heroes" data-nav="heroes">Heroes</a></li>
+        <li><a href="#when" data-nav="when">When</a></li>
+        <li><a href="#where" data-nav="where">Where</a></li>
+        <li><a href="#how" data-nav="how">How</a></li>
+        <li><a href="#why" data-nav="why">Why</a></li>
+        <li><a href="#ai" data-nav="ai">AI Prompts</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================ WHAT / HOME (default) ============================ -->
+    <section id="what" class="page-section" aria-labelledby="what-h">
+      <p class="eyebrow">What &#8226; Home</p>
+      <h2 id="what-h">What Is Overwatch?</h2>
+      <p>Welcome to <strong>Hero Ready</strong>, my personal corner of the internet dedicated to <strong>Overwatch</strong>&mdash;the team-based hero shooter from Blizzard. Two squads of five clash on objective maps, and instead of picking the same soldier, every player chooses a distinct <em>hero</em> with their own weapons, abilities, and ultimate.</p>
+      <p>What hooked me is that Overwatch is less about raw aim and more about the puzzle of the team fight: who do we dive, which ultimates trade, and when do we swap heroes to counter the enemy. Every match is a tiny strategy session played at high speed.</p>
+
+      <figure>
+        <img src="images/what.svg" alt="A stylized payload escort scene with a glowing Overwatch objective hexagon above a cart on a dotted route.">
+        <figcaption>
+          <span class="cap">Escort the payload &#8211; the classic Overwatch objective.</span>
+          <span class="ai-prompt"><em>AI image prompt: &#8220;Flat geometric illustration of an Overwatch payload cart on a dotted route, glowing hexagon objective marker, dark navy and orange palette, clean vector style.&#8221;</em></span>
+        </figcaption>
+      </figure>
+
+      <h3>The three roles at a glance</h3>
+      <div class="cards">
+        <article class="card role-tank">
+          <h3>Tank</h3>
+          <p>Big health pools and shields. Tanks make space, start fights, and protect the team. Sub-roles: <strong>Bruiser, Initiator, Stalwart</strong>.</p>
+        </article>
+        <article class="card role-damage">
+          <h3>Damage</h3>
+          <p>The primary kill threat. Damage heroes secure picks and pressure the backline. Sub-roles: <strong>Flanker, Recon, Sharpshooter, Specialist</strong>.</p>
+        </article>
+        <article class="card role-support">
+          <h3>Support</h3>
+          <p>Healing and utility that keeps everyone alive. Supports enable the whole team. Sub-roles: <strong>Medic, Survivor, Tactician</strong>.</p>
+        </article>
+      </div>
+
+      <p>Use the navigation above to jump around the site. Head to <a href="#heroes" data-nav="heroes">Heroes</a> to browse the full roster by role and sub-role.</p>
+    </section>
+
+    <!-- ============================ WHO / ABOUT ME ============================ -->
+    <section id="who" class="page-section" aria-labelledby="who-h" hidden>
+      <p class="eyebrow">Who &#8226; About Me</p>
+      <h2 id="who-h">Who I Am</h2>
+      <p>Hi, I&#8217;m <strong>[Your Name]</strong>&mdash;a student, a teammate, and a borderline-obsessed Overwatch player. <!-- TODO: replace [Your Name] and the profile details below with your real info. --> I started playing because a friend needed a fifth, and I stayed because I fell in love with the rhythm of coordinated team fights.</p>
+      <p>I float between all three roles, but I&#8217;m happiest making clutch saves as a support or setting the pace as a dive tank. Off the objective, I love theory-crafting comps and watching pro matches to steal new ideas.</p>
+
+      <figure>
+        <img src="images/who.svg" alt="A gamer wearing an orange headset framed inside a glowing Overwatch hexagon.">
+        <figcaption>
+          <span class="cap">That&#8217;s me &#8211; headset on, comms open, ready to call targets.</span>
+          <span class="ai-prompt"><em>AI image prompt: &#8220;Minimal vector avatar of a gamer with a headset inside a hexagon frame, navy background, orange accents, consistent flat illustration style.&#8221;</em></span>
+        </figcaption>
+      </figure>
+
+      <table>
+        <caption>My player profile</caption>
+        <tbody>
+          <tr><th scope="row">Gamertag</th><td>[YourTag#1234]</td></tr>
+          <tr><th scope="row">Favorite role</th><td>Support / Dive Tank</td></tr>
+          <tr><th scope="row">Main heroes</th><td>Kiriko, Winston, Tracer</td></tr>
+          <tr><th scope="row">Peak rank</th><td>[Platinum &#8211; update me]</td></tr>
+          <tr><th scope="row">Platform</th><td>[PC / Console]</td></tr>
+        </tbody>
+      </table>
+
+      <p><em>Everything in brackets is a placeholder&mdash;swap in your real gamertag, rank, and mains before you submit.</em></p>
+    </section>
+
+    <!-- ============================ HEROES / ROSTER ============================ -->
+    <section id="heroes" class="page-section" aria-labelledby="heroes-h" hidden>
+      <p class="eyebrow">The Roster</p>
+      <h2 id="heroes-h">The Heroes</h2>
+      <p>This is the heart of the site. Filter the roster by <strong>role</strong> (Tank, Damage, Support) and then drill into a <strong>sub-role</strong>. Select any hero card to read a short background and what makes them tick.</p>
+
+      <figure>
+        <img src="images/heroes.svg" alt="Three role emblems side by side: a blue shield for Tank, a red crosshair for Damage, and a gold cross for Support.">
+        <figcaption>
+          <span class="cap">Every hero belongs to one role and one sub-role.</span>
+          <span class="ai-prompt"><em>AI image prompt: &#8220;Three circular role emblems in a row&#8212;shield, crosshair, medical cross&#8212;blue, red and gold, flat vector, dark background, matching set.&#8221;</em></span>
+        </figcaption>
+      </figure>
+
+      <div class="roster-controls">
+        <div class="filter-group" role="group" aria-label="Filter heroes by role">
+          <span class="group-label">Role</span>
+          <button type="button" class="filter-btn" data-role="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-btn" data-role="tank" aria-pressed="false">Tank</button>
+          <button type="button" class="filter-btn" data-role="damage" aria-pressed="false">Damage</button>
+          <button type="button" class="filter-btn" data-role="support" aria-pressed="false">Support</button>
+        </div>
+        <div class="filter-group" id="subrole-group" role="group" aria-label="Filter heroes by sub-role">
+          <span class="group-label">Sub-role</span>
+          <!-- sub-role buttons are generated by JavaScript based on the chosen role -->
+        </div>
+        <p class="roster-count" id="roster-count" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="hero-detail" id="hero-detail" role="region" hidden tabindex="-1" aria-label="Selected hero details">
+        <div class="detail-head">
+          <span class="avatar" id="detail-avatar" aria-hidden="true"></span>
+          <div>
+            <h3 id="detail-name">Hero details</h3>
+            <div class="pills" id="detail-pills"></div>
+          </div>
+          <button type="button" class="btn close-btn" id="detail-close">Close</button>
+        </div>
+        <div class="detail-body">
+          <p id="detail-blurb"></p>
+        </div>
+      </div>
+
+      <div class="hero-grid" id="hero-grid">
+        <noscript><p>Enable JavaScript to browse and filter the interactive hero roster.</p></noscript>
+      </div>
+    </section>
+
+    <!-- ============================ WHEN ============================ -->
+    <section id="when" class="page-section" aria-labelledby="when-h" hidden>
+      <p class="eyebrow">When &#8226; Seasons & Schedule</p>
+      <h2 id="when-h">When I Play</h2>
+      <p>Overwatch runs on <strong>competitive seasons</strong> that refresh roughly every couple of months, each bringing balance changes, new heroes, and fresh battle-pass content. That cadence keeps the game feeling new and gives me a reason to climb the ranked ladder again and again.</p>
+      <p>For me, the best time to queue is weeknights after homework and weekend mornings before the lobbies get sweaty. Late-night ranked is a trap&mdash;tired aim and tilted teammates rarely win.</p>
+
+      <figure>
+        <img src="images/when.svg" alt="A clock surrounded by labels reading Season, Prime Time, Queue, and Rank.">
+        <figcaption>
+          <span class="cap">Timing matters&#8212;both the season and the hour.</span>
+          <span class="ai-prompt"><em>AI image prompt: &#8220;Flat vector clock face with seasonal labels around it, navy and orange theme, minimal game-UI style.&#8221;</em></span>
+        </figcaption>
+      </figure>
+
+      <table>
+        <caption>My typical weekly play schedule</caption>
+        <thead>
+          <tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Mode</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Tuesday</td><td>7:00&#8211;9:00 PM</td><td>Quick Play warm-up</td></tr>
+          <tr><td>Thursday</td><td>8:00&#8211;10:00 PM</td><td>Competitive</td></tr>
+          <tr><td>Saturday</td><td>10:00 AM&#8211;Noon</td><td>Competitive grind</td></tr>
+          <tr><td>Sunday</td><td>Afternoon</td><td>Arcade & new heroes</td></tr>
+        </tbody>
+      </table>
+
+      <ul class="feature-list">
+        <li>New season = re-learn the meta and re-do placement matches.</li>
+        <li>Limited-time events (Halloween Terror, Winter Wonderland) are my favorite weeks.</li>
+        <li>I avoid ranked when I&#8217;m tilted&#8212;Quick Play resets my mood.</li>
+      </ul>
+    </section>
+
+    <!-- ============================ WHERE ============================ -->
+    <section id="where" class="page-section" aria-labelledby="where-h" hidden>
+      <p class="eyebrow">Where &#8226; Maps & Places</p>
+      <h2 id="where-h">Where It Happens</h2>
+      <p>Overwatch is global&#8212;literally. Its maps are set in real and reimagined locations around the world, and matches are played online across PC and console with cross-play. My &#8220;where&#8221; is split between the maps I love in-game and my actual battle station at home.</p>
+      <p>Map knowledge is an underrated skill: high grounds, health-pack spots, and flank routes win fights before they start.</p>
+
+      <figure>
+        <img src="images/where.svg" alt="A grid-style world map with three glowing location pins in orange, blue, and gold.">
+        <figcaption>
+          <span class="cap">Favorite maps, pinned across the globe.</span>
+          <span class="ai-prompt"><em>AI image prompt: &#8220;Stylized dark world map grid with three glowing location pins, orange blue and gold, flat vector, matching site palette.&#8221;</em></span>
+        </figcaption>
+      </figure>
+
+      <div class="cards">
+        <article class="card">
+          <h3>King&#8217;s Row</h3>
+          <p>A moody London hybrid map. The first-point choke is iconic and the high grounds reward good positioning.</p>
+        </article>
+        <article class="card">
+          <h3>Ilios</h3>
+          <p>A sunny Greek control map with three rounds and a very real risk of getting booped into the ocean.</p>
+        </article>
+        <article class="card">
+          <h3>Circuit Royal</h3>
+          <p>A sleek Monte Carlo escort map with long sightlines that snipers absolutely adore.</p>
+        </article>
+      </div>
+
+      <ul class="feature-list">
+        <li>My setup: a comfy chair, low-latency connection, and headphones for callouts.</li>
+        <li>Cross-play means I can squad up with friends on any platform.</li>
+        <li>I keep map callouts open on a second screen when I&#8217;m learning a new arena.</li>
+      </ul>
+    </section>
+
+    <!-- ============================ HOW ============================ -->
+    <section id="how" class="page-section" aria-labelledby="how-h" hidden>
+      <p class="eyebrow">How &#8226; Getting Started</p>
+      <h2 id="how-h">How To Get Into It</h2>
+      <p>Overwatch is free-to-play, so the barrier to entry is basically zero. The hard part is learning to think like a team player instead of a lone wolf. Here&#8217;s the path I recommend to anyone I drag into the game.</p>
+
+      <figure>
+        <img src="images/how.svg" alt="A game controller with four colored role buttons next to a directional pad.">
+        <figcaption>
+          <span class="cap">Pick, position, play&#8212;the loop of every match.</span>
+          <span class="ai-prompt"><em>AI image prompt: &#8220;Flat vector game controller with four colored buttons representing roles, navy and orange palette, clean minimal style.&#8221;</em></span>
+        </figcaption>
+      </figure>
+
+      <ol>
+        <li><strong>Start in the practice range and tutorials</strong> to learn movement and aim.</li>
+        <li><strong>Find one hero per role</strong> you enjoy so you can flex when the team needs it.</li>
+        <li><strong>Use your microphone</strong>&#8212;even simple callouts win games.</li>
+        <li><strong>Watch your death replays</strong> to understand what killed you.</li>
+        <li><strong>Play ranked once you&#8217;re comfortable</strong> and treat every loss as a lesson.</li>
+      </ol>
+
+      <form id="role-finder" aria-labelledby="finder-h">
+        <h3 id="finder-h">Which role fits you?</h3>
+        <fieldset>
+          <legend>Tell me your playstyle</legend>
+          <label for="playstyle">I most enjoy&hellip;</label>
+          <select id="playstyle" name="playstyle">
+            <option value="">Choose one&hellip;</option>
+            <option value="tank">Leading the charge and soaking damage</option>
+            <option value="damage">Getting eliminations and securing picks</option>
+            <option value="support">Keeping my team alive and enabling plays</option>
+          </select>
+        </fieldset>
+        <button type="submit" class="btn">Recommend a role</button>
+        <p class="form-output" id="finder-output" role="status" aria-live="polite">Your recommendation will appear here.</p>
+      </form>
+    </section>
+
+    <!-- ============================ WHY ============================ -->
+    <section id="why" class="page-section" aria-labelledby="why-h" hidden>
+      <p class="eyebrow">Why &#8226; My Passion</p>
+      <h2 id="why-h">Why I Love It</h2>
+      <p>Plenty of shooters are about reflexes. Overwatch is about <strong>people</strong>&#8212;five players solving a problem together in real time. Nothing beats the feeling of a perfectly timed ultimate combo that flips a losing fight.</p>
+      <p>It&#8217;s also a game with heart. The heroes have rich backstories, the cinematics are gorgeous, and the community creates endless art, memes, and highlight clips.</p>
+
+      <figure>
+        <img src="images/why.svg" alt="A glowing orange heart inside an Overwatch hexagon with the words For The Team.">
+        <figcaption>
+          <span class="cap">At the end of the day, it&#8217;s all for the team.</span>
+          <span class="ai-prompt"><em>AI image prompt: &#8220;Glowing heart inside a hexagon frame with the phrase For The Team, orange gradient on dark navy, flat vector.&#8221;</em></span>
+        </figcaption>
+      </figure>
+
+      <ul class="feature-list">
+        <li><strong>Teamwork:</strong> coordinated plays beat raw mechanical skill.</li>
+        <li><strong>Variety:</strong> 40+ heroes means there&#8217;s always a new playstyle to learn.</li>
+        <li><strong>Community:</strong> friends, voice chat, and shared highlight reels.</li>
+        <li><strong>Growth:</strong> climbing the ranked ladder is genuinely rewarding.</li>
+      </ul>
+
+      <blockquote>&#8220;Heroes never die!&#8221; &#8212; and neither does my love for this game on the days it absolutely should have.</blockquote>
+    </section>
+
+    <!-- ============================ AI PROMPTS ============================ -->
+    <section id="ai" class="page-section" aria-labelledby="ai-h" hidden>
+      <p class="eyebrow">Transparency</p>
+      <h2 id="ai-h">AI Prompts</h2>
+      <p>In the spirit of honesty, here&#8217;s how I used AI on this project. All of the imagery on this site is AI-generated vector art in a single consistent flat style, and I used an AI assistant to help structure and proofread some of the written copy. Every prompt is listed below.</p>
+
+      <figure>
+        <img src="images/ai.svg" alt="A friendly omnic-style robot head with the label Prompts and Process.">
+        <figcaption>
+          <span class="cap">Transparency about the tools behind this page.</span>
+          <span class="ai-prompt"><em>AI image prompt: &#8220;Friendly omnic robot head, flat vector, glowing blue eyes, navy and orange palette, label reading prompts and process.&#8221;</em></span>
+        </figcaption>
+      </figure>
+
+      <table>
+        <caption>Prompts used to build this site</caption>
+        <thead>
+          <tr><th scope="col">Used for</th><th scope="col">Prompt summary</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Images</td><td>&#8220;Consistent flat vector illustrations in a navy + orange Overwatch palette&#8221; (full prompts shown under each figure).</td></tr>
+          <tr><td>Copy structure</td><td>&#8220;Help me organize a hobby site into Who/What/When/Where/How/Why sections with a personal voice.&#8221;</td></tr>
+          <tr><td>Hero data</td><td>&#8220;Verify Overwatch roles and sub-roles (Bruiser, Initiator, Stalwart, etc.) and group every hero correctly.&#8221;</td></tr>
+          <tr><td>Proofreading</td><td>&#8220;Check my text for grammar and tone while keeping it sounding like me.&#8221;</td></tr>
+        </tbody>
+      </table>
+
+      <ul class="feature-list">
+        <li>All images on this site are AI-generated in one consistent style.</li>
+        <li>The written content was drafted by me and refined with AI help.</li>
+        <li>Overwatch hero names, roles, and lore belong to Blizzard Entertainment.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <ul class="validation" aria-label="Validation tools">
+        <li><a class="btn" href="https://validator.w3.org/check?uri=referer">Validate HTML</a></li>
+        <li><a class="btn" href="https://jigsaw.w3.org/css-validator/check/referer">Validate CSS</a></li>
+        <li><a class="btn" href="https://wave.webaim.org/">Check Accessibility</a></li>
+      </ul>
+      <div class="footer-meta">
+        <p>Designed by <a href="../index.html">[Your Design Firm]</a>.</p>
+        <p>A fan project. Overwatch&reg; is a trademark of Blizzard Entertainment, Inc.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    /* ------------------------------------------------------------------
+       1. Single-page section navigation (show only one section at a time)
+       ------------------------------------------------------------------ */
+    var sections = Array.prototype.slice.call(document.querySelectorAll(".page-section"));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".main-nav a[data-nav]"));
+    var DEFAULT_SECTION = "what";
+
+    function showSection(id) {
+      var valid = sections.some(function (s) { return s.id === id; });
+      if (!valid) { id = DEFAULT_SECTION; }
+      sections.forEach(function (s) {
+        if (s.id === id) { s.removeAttribute("hidden"); }
+        else { s.setAttribute("hidden", "hidden"); }
+      });
+      navLinks.forEach(function (a) {
+        if (a.getAttribute("data-nav") === id) { a.setAttribute("aria-current", "page"); }
+        else { a.removeAttribute("aria-current"); }
+      });
+    }
+
+    document.querySelectorAll("a[data-nav]").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = a.getAttribute("data-nav");
+        if (history.replaceState) { history.replaceState(null, "", "#" + id); }
+        else { location.hash = id; }
+        showSection(id);
+        window.scrollTo({ top: 0, behavior: "auto" });
+        var heading = document.getElementById(id).querySelector("h2");
+        if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus(); }
+      });
+    });
+
+    window.addEventListener("hashchange", function () {
+      showSection(location.hash.replace("#", ""));
+    });
+
+    showSection(location.hash ? location.hash.replace("#", "") : DEFAULT_SECTION);
+
+    /* ------------------------------------------------------------------
+       2. Hero roster data
+       ------------------------------------------------------------------ */
+    var ROLE_LABELS = { tank: "Tank", damage: "Damage", support: "Support" };
+    var ROLE_COLORS = { tank: "#4aa3df", damage: "#ef6a5a", support: "#ecc35a" };
+
+    var SUBROLES = {
+      tank:    ["Bruiser", "Initiator", "Stalwart"],
+      damage:  ["Flanker", "Recon", "Sharpshooter", "Specialist"],
+      support: ["Medic", "Survivor", "Tactician"]
+    };
+
+    var HEROES = [
+      /* ---- TANK ---- */
+      { name: "Reinhardt",     abbr: "RH", role: "tank", sub: "Stalwart",  blurb: "A German crusader in rocket-powered armor who swings a massive hammer and projects a barrier shield. Reinhardt is the honorable knight of the team&#8212;a frontline anchor who refuses to be pushed off the point." },
+      { name: "Sigma",         abbr: "SG", role: "tank", sub: "Stalwart",  blurb: "A brilliant astrophysicist who gained control of gravity after an experiment went wrong. Sigma floats above the fight, throwing kinetic rocks and absorbing damage with his experimental barrier." },
+      { name: "Ramattra",      abbr: "RA", role: "tank", sub: "Stalwart",  blurb: "Leader of Null Sector who shifts between a staff-wielding Omnic form and a hulking Nemesis form. He fights for omnic rights and excels at grinding down enemy frontlines." },
+      { name: "Junker Queen",  abbr: "JQ", role: "tank", sub: "Stalwart",  blurb: "The ruthless ruler of Junkertown, armed with a shotgun, a throwing knife, and a commanding war cry. She is a brawler who thrives in the chaos of close-range fights." },
+      { name: "Hazard",        abbr: "HA", role: "tank", sub: "Stalwart",  blurb: "An agile Scottish insurgent who wields a bladed gauntlet and can raise spike walls to control space. He blends a tank&#8217;s durability with surprising mobility." },
+      { name: "Winston",       abbr: "WN", role: "tank", sub: "Initiator", blurb: "A genetically enhanced gorilla scientist from the Horizon Lunar Colony. Winston leaps into the enemy backline with his jump pack and zaps multiple foes with his Tesla cannon&#8212;the classic dive tank." },
+      { name: "D.Va",          abbr: "DV", role: "tank", sub: "Initiator", blurb: "Former pro gamer Hana Song defends South Korea in a nimble mech. Her boosters let her fly into fights and her Defense Matrix eats incoming projectiles out of the air." },
+      { name: "Doomfist",      abbr: "DF", role: "tank", sub: "Initiator", blurb: "Akande Ogundimu channels raw power through his gauntlet, slamming into the enemy and knocking them around. A high-mobility bruiser who disrupts the backline and escapes." },
+      { name: "Wrecking Ball", abbr: "WB", role: "tank", sub: "Initiator", blurb: "Hammond, a hyper-intelligent hamster, pilots a rolling mech. He builds momentum with his grappling hook to smash through enemies and create chaos." },
+      { name: "Orisa",         abbr: "OR", role: "tank", sub: "Bruiser",   blurb: "An omnic guardian rebuilt to protect Numbani. With her energy javelin and Fortify ability, Orisa is a sturdy anchor who can stand her ground against burst damage." },
+      { name: "Mauga",         abbr: "MG", role: "tank", sub: "Bruiser",   blurb: "A towering Samoan mercenary wielding twin chainguns named Gunny and Cha-Cha. He loves the chaos of a brawl and heals himself by landing critical hits." },
+      { name: "Roadhog",       abbr: "RG", role: "tank", sub: "Bruiser",   blurb: "A one-man apocalypse from the Australian Outback. His chain hook yanks enemies into shotgun range, and Take a Breather keeps him in the fight far longer than expected." },
+      { name: "Zarya",         abbr: "ZY", role: "tank", sub: "Bruiser",   blurb: "A Russian weightlifter-turned-soldier whose particle barriers convert incoming damage into beam energy. Shield a teammate at the right moment and her output skyrockets." },
+
+      /* ---- DAMAGE ---- */
+      { name: "Genji",         abbr: "GJ", role: "damage", sub: "Flanker",      blurb: "A cyborg ninja of the Shimada clan who hurls shuriken and deflects projectiles back at his attackers. Dragonblade lets him carve through a distracted team in seconds." },
+      { name: "Reaper",        abbr: "RP", role: "damage", sub: "Flanker",      blurb: "Gabriel Reyes, a wraith who shreds tanks at close range with twin shotguns and heals by reaping souls. He teleports behind the enemy to cause havoc." },
+      { name: "Tracer",        abbr: "TR", role: "damage", sub: "Flanker",      blurb: "Lena Oxton, a time-bending pilot who blinks around the fight and rewinds with Recall. The poster hero of Overwatch and a nightmare for any backline support." },
+      { name: "Venture",       abbr: "VN", role: "damage", sub: "Flanker",      blurb: "An energetic archaeologist who burrows underground with their drill and bursts back out to surprise enemies. Equal parts mobility and explosive close-range damage." },
+      { name: "Pharah",        abbr: "PH", role: "damage", sub: "Recon",        blurb: "Fareeha Amari rains rockets from above in her Raptora suit. Controlling the skybox, she pressures grounded enemies and forces them to look up." },
+      { name: "Echo",          abbr: "EC", role: "damage", sub: "Recon",        blurb: "An evolutionary flying robot who can duplicate any enemy hero with her ultimate. Echo is versatile, mobile, and devastating in the right hands." },
+      { name: "Sombra",        abbr: "SB", role: "damage", sub: "Recon",        blurb: "A stealthy hacker who disables enemy abilities and slips away invisible. She wages information warfare, picking off isolated targets and exposing the enemy team." },
+      { name: "Freja",         abbr: "FR", role: "damage", sub: "Recon",        blurb: "A daring Danish bounty hunter armed with an explosive-bolt crossbow and agile movement. She darts around the fight to line up high-impact shots." },
+      { name: "Widowmaker",    abbr: "WM", role: "damage", sub: "Sharpshooter", blurb: "Am&eacute;lie Lacroix, a deadly sniper assassin with a grappling hook and venom mine. One charged headshot can delete a target before they react." },
+      { name: "Hanzo",         abbr: "HZ",role: "damage", sub: "Sharpshooter", blurb: "A Shimada archer seeking redemption. His storm arrows shred at close range and his Dragonstrike can wipe a clustered team through walls." },
+      { name: "Ashe",          abbr: "AS", role: "damage", sub: "Sharpshooter", blurb: "Leader of the Deadlock Gang, firing a lever-action rifle and tossing dynamite. Her ultimate calls in B.O.B., an omnic enforcer who charges the enemy." },
+      { name: "Cassidy",       abbr: "CS", role: "damage", sub: "Sharpshooter", blurb: "A roaming outlaw with a heavy revolver and a magnetic grenade. When Deadeye locks on, the whole enemy team has a reason to take cover." },
+      { name: "Sojourn",       abbr: "SJ", role: "damage", sub: "Sharpshooter", blurb: "Vivian Chase, a former Overwatch captain whose railgun charges as she lands hits, then unleashes a one-shot energy blast. Mobile, precise, and relentless." },
+      { name: "Bastion",       abbr: "BT", role: "damage", sub: "Specialist",   blurb: "A reactivated battle omnic that converts between a mobile recon form and a devastating assault turret. Position it well and it melts everything in front of it." },
+      { name: "Junkrat",       abbr: "JR", role: "damage", sub: "Specialist",   blurb: "A manic Australian demolitionist who lobs grenades, lays traps, and rolls out the RIP-Tire. Pure chaotic area denial with a wicked sense of humor." },
+      { name: "Mei",           abbr: "ME", role: "damage", sub: "Specialist",   blurb: "A climatologist who freezes enemies solid and walls off chokes with her endothermic blaster. Annoying, adorable, and a master of controlling space." },
+      { name: "Soldier: 76",   abbr: "76", role: "damage", sub: "Specialist",   blurb: "Jack Morrison, a grizzled vigilante with a pulse rifle, helix rockets, and a biotic healing field. The most all-rounded, beginner-friendly damage hero." },
+      { name: "Symmetra",      abbr: "SY", role: "damage", sub: "Specialist",   blurb: "A Vishkar architect who bends hard light into turrets, a charging beam, and a game-changing teleporter. She rewards clever setup and map control." },
+      { name: "Torbj&ouml;rn", abbr: "TB", role: "damage", sub: "Specialist",   blurb: "A gruff Swedish engineer who deploys a turret and superheats his own armor with Overload. His Molten Core floods an area with lava to deny ground." },
+
+      /* ---- SUPPORT ---- */
+      { name: "Mercy",         abbr: "MC", role: "support", sub: "Medic",     blurb: "Dr. Angela Ziegler, the guardian angel who flies between allies with her healing and damage-boost beams. Her Resurrect can single-handedly swing a team fight." },
+      { name: "Moira",         abbr: "MO", role: "support", sub: "Medic",     blurb: "A controversial geneticist who balances biotic healing with damage-draining orbs. Moira sustains the team while clawing health back from the enemy." },
+      { name: "Kiriko",        abbr: "KK", role: "support", sub: "Medic",     blurb: "The protector of Kanezaka, throwing healing ofuda and a cleansing Protection Suzu. Swift Step lets her teleport to any ally in trouble&#8212;one of my mains." },
+      { name: "Lifeweaver",    abbr: "LW", role: "support", sub: "Medic",     blurb: "Niran, a Thai bio-light scientist who grows healing blossoms and yanks allies out of danger with Life Grip. A cerebral support who saves teammates from themselves." },
+      { name: "Brigitte",      abbr: "BR", role: "support", sub: "Survivor",  blurb: "Torbj&ouml;rn&#8217;s goddaughter, a frontline armorer with a flail, a shield, and repair packs. She thrives in the brawl, protecting divers and bullying flankers." },
+      { name: "Illari",        abbr: "IL", role: "support", sub: "Survivor",  blurb: "An Inti warrior of the sun who wields a solar rifle and plants a healing pylon. She blends sustained healing with serious long-range damage." },
+      { name: "Juno",          abbr: "JU", role: "support", sub: "Survivor",  blurb: "A hopeful Martian recruit with pulsar torpedoes, a speed-boosting Glide Boost, and the team-wide Hyper Ring. Fast, flexible, and great at enabling dives." },
+      { name: "Wuyang",        abbr: "WY", role: "support", sub: "Survivor",  blurb: "A graceful support who channels the flow of water and wind, weaving through fights while keeping allies topped up. (Verify the latest in-game lore details before you submit.)" },
+      { name: "Ana",           abbr: "AN", role: "support", sub: "Tactician", blurb: "A veteran sniper whose biotic rifle heals allies and damages foes from afar. Her Sleep Dart and Nano Boost are some of the most game-changing tools in Overwatch." },
+      { name: "Baptiste",      abbr: "BP", role: "support", sub: "Tactician", blurb: "A combat medic with a regenerative burst, a launching field, and the clutch Immortality Field that can deny a wipe at the perfect moment." },
+      { name: "L&uacute;cio",  abbr: "LC", role: "support", sub: "Tactician", blurb: "A Brazilian DJ and freedom fighter who wall-rides while playing songs that speed up or heal the team. His Sound Barrier is a fight-saving shield of sound." },
+      { name: "Zenyatta",      abbr: "ZN", role: "support", sub: "Tactician", blurb: "An omnic monk who grants Harmony to allies and curses enemies with Discord, amplifying all damage they take. Transcendence makes the whole team briefly unkillable." }
+    ];
+
+    /* ------------------------------------------------------------------
+       3. Avatar generator (inline SVG, consistent style)
+       ------------------------------------------------------------------ */
+    function avatarSVG(hero) {
+      var color = ROLE_COLORS[hero.role];
+      return '' +
+        '<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true" focusable="false">' +
+          '<polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="#1c2a38" stroke="' + color + '" stroke-width="5"/>' +
+          '<text x="50" y="50" text-anchor="middle" dominant-baseline="central" ' +
+            'font-family="Trebuchet MS, Segoe UI, sans-serif" font-size="28" font-weight="bold" fill="' + color + '">' +
+            hero.abbr +
+          '</text>' +
+        '</svg>';
+    }
+
+    /* ------------------------------------------------------------------
+       4. Filtering + rendering
+       ------------------------------------------------------------------ */
+    var grid = document.getElementById("hero-grid");
+    var subGroup = document.getElementById("subrole-group");
+    var countEl = document.getElementById("roster-count");
+    var state = { role: "all", sub: "all" };
+
+    function buildSubroleButtons() {
+      // remove existing buttons (keep the label span)
+      Array.prototype.slice.call(subGroup.querySelectorAll(".filter-btn")).forEach(function (b) { b.remove(); });
+
+      var subs = ["all"];
+      if (state.role !== "all") { subs = subs.concat(SUBROLES[state.role]); }
+
+      subs.forEach(function (sub) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "filter-btn";
+        btn.setAttribute("data-sub", sub);
+        btn.setAttribute("aria-pressed", state.sub === sub ? "true" : "false");
+        btn.textContent = sub === "all" ? "All sub-roles" : sub;
+        btn.addEventListener("click", function () {
+          state.sub = sub;
+          updatePressed();
+          render();
+        });
+        subGroup.appendChild(btn);
+      });
+
+      subGroup.hidden = (state.role === "all");
+    }
+
+    function updatePressed() {
+      document.querySelectorAll(".filter-btn[data-role]").forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-role") === state.role ? "true" : "false");
+      });
+      document.querySelectorAll(".filter-btn[data-sub]").forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-sub") === state.sub ? "true" : "false");
+      });
+    }
+
+    function filteredHeroes() {
+      return HEROES.filter(function (h) {
+        var roleOk = state.role === "all" || h.role === state.role;
+        var subOk = state.sub === "all" || h.sub === state.sub;
+        return roleOk && subOk;
+      });
+    }
+
+    function render() {
+      var list = filteredHeroes();
+      grid.innerHTML = "";
+      list.forEach(function (hero) {
+        var card = document.createElement("button");
+        card.type = "button";
+        card.className = "hero-card " + hero.role;
+        card.setAttribute("data-name", hero.name);
+        card.innerHTML =
+          '<span class="avatar">' + avatarSVG(hero) + '</span>' +
+          '<span class="hero-name">' + hero.name + '</span>' +
+          '<span class="hero-sub">' + ROLE_LABELS[hero.role] + ' &#8226; ' + hero.sub + '</span>';
+        card.addEventListener("click", function () { openDetail(hero, card); });
+        grid.appendChild(card);
+      });
+      var roleName = state.role === "all" ? "all roles" : ROLE_LABELS[state.role];
+      var subName = state.sub === "all" ? "" : " &#8226; " + state.sub;
+      countEl.innerHTML = "Showing " + list.length + " hero" + (list.length === 1 ? "" : "es") + " (" + roleName + subName + ").";
+    }
+
+    /* role buttons */
+    document.querySelectorAll(".filter-btn[data-role]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        state.role = b.getAttribute("data-role");
+        state.sub = "all";
+        updatePressed();
+        buildSubroleButtons();
+        render();
+      });
+    });
+
+    /* ------------------------------------------------------------------
+       5. Hero detail panel
+       ------------------------------------------------------------------ */
+    var detail = document.getElementById("hero-detail");
+    var detailName = document.getElementById("detail-name");
+    var detailPills = document.getElementById("detail-pills");
+    var detailBlurb = document.getElementById("detail-blurb");
+    var detailAvatar = document.getElementById("detail-avatar");
+    var detailClose = document.getElementById("detail-close");
+
+    var lastTrigger = null;
+
+    function openDetail(hero, trigger) {
+      lastTrigger = trigger || null;
+      detailName.innerHTML = hero.name;
+      detailAvatar.innerHTML = avatarSVG(hero);
+      detailPills.innerHTML =
+        '<span class="pill ' + hero.role + '">' + ROLE_LABELS[hero.role] + '</span>' +
+        '<span class="pill ' + hero.role + '">' + hero.sub + '</span>';
+      detailBlurb.innerHTML = hero.blurb;
+      detail.removeAttribute("hidden");
+      detail.focus();
+    }
+
+    function closeDetail() {
+      detail.setAttribute("hidden", "hidden");
+      if (lastTrigger && document.body.contains(lastTrigger)) { lastTrigger.focus(); }
+    }
+
+    detailClose.addEventListener("click", closeDetail);
+    detail.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeDetail(); }
+    });
+
+    /* ------------------------------------------------------------------
+       6. Role-finder form
+       ------------------------------------------------------------------ */
+    var finder = document.getElementById("role-finder");
+    var finderOutput = document.getElementById("finder-output");
+    var RECS = {
+      tank: "You&#8217;re a Tank at heart&#8212;try a Stalwart like Reinhardt or an Initiator like Winston.",
+      damage: "Sounds like Damage&#8212;test a Sharpshooter like Ashe or a Flanker like Tracer.",
+      support: "You&#8217;re a Support&#8212;start with a Medic like Kiriko or a Tactician like L&uacute;cio."
+    };
+    finder.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var choice = document.getElementById("playstyle").value;
+      finderOutput.innerHTML = RECS[choice] || "Pick a playstyle above and I&#8217;ll suggest a role.";
+    });
+
+    /* ------------------------------------------------------------------
+       7. Initial render
+       ------------------------------------------------------------------ */
+    buildSubroleButtons();
+    render();
+  </script>
+</body>
+</html>
+
